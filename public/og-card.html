@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; }
+      body {
+        background: #0a0a0a;
+        font-family: "Geist", system-ui, sans-serif;
+        color: #fafafa;
+        position: relative;
+        overflow: hidden;
+      }
+      /* ambient glow field — periwinkle top-right, warm hint bottom-left */
+      .glow-a {
+        position: absolute; top: -280px; right: -220px; width: 760px; height: 760px;
+        background: radial-gradient(circle, rgba(91,141,239,0.20), rgba(91,141,239,0) 62%);
+        filter: blur(12px);
+      }
+      .glow-b {
+        position: absolute; bottom: -320px; left: -200px; width: 700px; height: 700px;
+        background: radial-gradient(circle, rgba(238,115,87,0.10), rgba(238,115,87,0) 60%);
+      }
+      .frame {
+        position: absolute; inset: 28px; border: 1px solid #1f1f1f; border-radius: 10px;
+      }
+      .inner {
+        position: relative; height: 100%; padding: 76px 84px;
+        display: flex; flex-direction: column; justify-content: space-between;
+      }
+      /* top: mark + wordmark */
+      .brand { display: flex; align-items: center; gap: 16px; }
+      .mark {
+        width: 46px; height: 46px; border: 1px solid #333; background: #1b1b1d;
+        border-radius: 6px; display: grid; place-items: center;
+        font-family: "Source Serif 4", serif; font-weight: 600; font-size: 27px; line-height: 1;
+        color: #fafafa; padding-bottom: 2px;
+      }
+      .wordmark { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; color: #fafafa; }
+      /* center block */
+      .kicker {
+        display: flex; align-items: center; gap: 10px;
+        font-family: "Geist Mono", monospace; font-size: 15px; letter-spacing: 0.16em;
+        text-transform: uppercase; color: #6b6b6b; margin-bottom: 22px;
+      }
+      .dot { width: 8px; height: 8px; border-radius: 999px; background: #5b8def; }
+      h1 {
+        font-family: "Source Serif 4", serif; font-weight: 600;
+        font-size: 92px; line-height: 0.98; letter-spacing: -0.02em; color: #fafafa;
+      }
+      h1 .sub { color: #6f6f6f; }
+      .tag {
+        margin-top: 26px; font-size: 23px; line-height: 1.4; color: #a0a0a0; max-width: 720px;
+      }
+      /* bottom: swatches + url */
+      .row { display: flex; align-items: flex-end; justify-content: space-between; }
+      .swatches { display: flex; gap: 12px; }
+      .sw { width: 52px; height: 52px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.08); }
+      .sw-l { margin-top: 12px; font-family: "Geist Mono", monospace; font-size: 12px; color: #6b6b6b; letter-spacing: 0.06em; }
+      .meta { text-align: right; }
+      .url { font-family: "Geist Mono", monospace; font-size: 17px; color: #cfcfcf; letter-spacing: 0.02em; }
+      .fonts { margin-top: 8px; font-family: "Geist Mono", monospace; font-size: 12.5px; color: #565656; }
+    </style>
+  </head>
+  <body>
+    <div class="glow-a"></div>
+    <div class="glow-b"></div>
+    <div class="frame"></div>
+    <div class="inner">
+      <div class="brand">
+        <div class="mark">P</div>
+        <div class="wordmark">Editorial&nbsp;Proxima</div>
+      </div>
+
+      <div>
+        <div class="kicker"><span class="dot"></span> A Design System · v1.0</div>
+        <h1>Editorial&nbsp;Proxima.<br /><span class="sub">A dark, editorial<br />business system.</span></h1>
+      </div>
+
+      <div class="row">
+        <div>
+          <div class="swatches">
+            <div class="sw" style="background:#5b8def"></div>
+            <div class="sw" style="background:#ee7357"></div>
+            <div class="sw" style="background:#a382e6"></div>
+            <div class="sw" style="background:#9ca05b"></div>
+          </div>
+          <div class="sw-l">FOUR THEMES · ONE RESERVED ACCENT</div>
+        </div>
+        <div class="meta">
+          <div class="url">editorialproxima.ogel.fyi</div>
+          <div class="fonts">Source Serif · Geist · Geist Mono</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

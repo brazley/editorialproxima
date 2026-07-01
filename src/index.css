@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+/* ==================================================================== *
+   EDITORIAL PROXIMA — token layer
+   --------------------------------------------------------------------
+   A dark, editorial business design system. As if the FT/Bloomberg built
+   a serifed, AI-quiet LinkedIn: near-black canvas, monochrome substance,
+   grays plus a single reserved periwinkle, squared geometry, hairline
+   borders, and intelligence present only as a whisper.
+
+   Two access paths to the same values:
+   1. Tailwind @theme tokens below drive the utility classes the component
+      library uses (bg-canvas, text-ink-2, border-line, rounded-card, …).
+   2. The --ep-* mirror in :root exposes the same decisions under an
+      explicit Editorial Proxima namespace for hand-written CSS, and is
+      documented 1:1 by src/tokens.ts.
+ * ==================================================================== */
+
+@theme {
+  /* ---- Color · surfaces (near-black, layered by lightness) ---------- */
+  --color-canvas: #0a0a0a;   /* app background — the page itself */
+  --color-surface: #131313;  /* primary card / panel fill */
+  --color-elevated: #191919; /* raised chip / input / nested fill */
+  --color-line: #1f1f1f;         /* hairline border, low contrast (default) */
+  --color-line-strong: #2b2b2b;  /* emphasized hairline (hover, dividers) */
+
+  /* ---- Color · ink (three-level text hierarchy) --------------------- */
+  --color-ink: #fafafa;   /* primary text, headlines */
+  --color-ink-2: #a0a0a0; /* secondary text, body-dim */
+  --color-ink-3: #6b6b6b; /* tertiary text, meta, captions */
+
+  /* ---- Color · accent (RESERVED periwinkle — AI / verified only) ---- */
+  --color-accent: #5b8def;        /* the single accent hue */
+  --color-accent-strong: #4d7cfe; /* pressed / high-emphasis accent */
+  --color-accent-ink: #b9ccff;    /* accent-tinted text on dark */
+
+  /* ---- Color · warm neutral + market signal ------------------------- */
+  --color-sand: #dad8cf; /* warm off-white — awards, wordmark warmth */
+  --color-gain: #56b981; /* positive delta (green) */
+  --color-loss: #e5715b; /* negative delta (warm red) */
+
+  /* ---- Color · category hues (certification / taxonomy) ------------- *
+     Muted, desaturated so they read as data, never decoration. */
+  --color-cat-gold: #c6a15b;   /* MBE — minority-owned */
+  --color-cat-rose: #ce7fa6;   /* WBE — women-owned */
+  --color-cat-blue: #6e93c7;   /* VBE — veteran-owned */
+  --color-cat-violet: #9a7fd1; /* LGBTBE — LGBTQ+-owned */
+  --color-cat-teal: #5fa79c;   /* DOBE — disability-owned */
+
+  /* ---- Typography · three families, three jobs --------------------- */
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;      /* body / UI */
+  --font-serif: "Source Serif 4", ui-serif, Georgia, serif;        /* display / editorial */
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;   /* tabular numerals */
+
+  /* ---- Radius · squared geometry (never a pill) -------------------- */
+  --radius-panel: 6px; /* large containers, sidebar rails */
+  --radius-card: 4px;  /* feed posts, metric tiles */
+  --radius-field: 4px; /* inputs, buttons */
+  --radius-chip: 3px;  /* tags, action chips, fact cards */
+}
+
+/* ==================================================================== *
+   Editorial Proxima namespace mirror + non-Tailwind scale tokens.
+   These carry the values @theme cannot (spacing intent, elevation,
+   motion) and provide an --ep-* alias for any hand-written CSS.
+ * ==================================================================== */
+:root {
+  /* color mirror */
+  --ep-canvas: var(--color-canvas);
+  --ep-surface: var(--color-surface);
+  --ep-elevated: var(--color-elevated);
+  --ep-line: var(--color-line);
+  --ep-line-strong: var(--color-line-strong);
+  --ep-ink-1: var(--color-ink);
+  --ep-ink-2: var(--color-ink-2);
+  --ep-ink-3: var(--color-ink-3);
+  --ep-accent: var(--color-accent);
+  --ep-accent-strong: var(--color-accent-strong);
+  --ep-accent-ink: var(--color-accent-ink);
+  --ep-accent-glow: color-mix(in oklch, var(--color-accent) 9%, transparent);
+  --ep-sand: var(--color-sand);
+  --ep-gain: var(--color-gain);
+  --ep-loss: var(--color-loss);
+
+  /* spacing scale — 4px base rhythm (documented; Tailwind spacing utilities
+     resolve to the same grid, these name the canonical steps) */
+  --ep-space-1: 4px;
+  --ep-space-2: 8px;
+  --ep-space-3: 12px;
+  --ep-space-4: 16px;
+  --ep-space-5: 20px;
+  --ep-space-6: 24px;
+  --ep-space-8: 32px;
+  --ep-space-10: 40px;
+
+  /* elevation — this system elevates by SURFACE LAYER, not shadow.
+     Shadows are reserved for detached overlays (menus, popovers). */
+  --ep-elevation-0: none;
+  --ep-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --ep-elevation-2: 0 8px 24px -6px rgba(0, 0, 0, 0.66);
+  --ep-elevation-focus:
+    0 0 0 2px var(--color-canvas),
+    0 0 0 3px color-mix(in oklch, var(--color-accent) 60%, transparent);
+
+  /* motion — durations and easings used with framer-motion */
+  --ep-dur-fast: 0.35s;
+  --ep-dur-base: 0.4s;
+  --ep-dur-slow: 0.5s;
+  --ep-ease-standard: cubic-bezier(0.22, 1, 0.36, 1); /* ease-out, entrance */
+  --ep-ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --ep-stagger: 0.045s; /* per-item feed stagger step */
+}
+
+/* ==================================================================== *
+   THEMES — the reserved accent is the only thing that changes.
+   --------------------------------------------------------------------
+   The dark editorial bones (canvas, ink, surfaces, borders, radius,
+   type, category hues) are constant. A theme overrides only the three
+   accent tokens; everything downstream follows automatically — the ~9%
+   glow, the focus ring, sparklines, fit/progress bars, badge tints, and
+   every accent-ink label — because they are all expressed as
+   color-mix() over, or var() of, --color-accent.
+
+   Apply with a data-theme attribute on <html>:
+       <html data-theme="coral">   (blue is the default — no attr needed)
+
+   Each accent set is tuned to sit right on the near-black canvas at the
+   same restraint as the periwinkle: a mid-light accent, a punchier
+   pressed "strong", and a light, readable accent-ink for text on dark.
+ * ==================================================================== */
+
+/* Blue — the default periwinkle. Declared explicitly for parity/robustness. */
+:root[data-theme="blue"] {
+  --color-accent: #5b8def;
+  --color-accent-strong: #4d7cfe;
+  --color-accent-ink: #b9ccff;
+}
+
+/* Coral — warm, editorial coral. Softened off the hot CMND #FF714C so it
+   reads as a signal, not a siren; strong runs punchier, ink is a peach tint. */
+:root[data-theme="coral"] {
+  --color-accent: #ee7357;
+  --color-accent-strong: #ff6f4d;
+  --color-accent-ink: #ffc3b2;
+}
+
+/* Purple — a refined violet from the cert-gradient family (#9A7FD1),
+   nudged brighter so it reads as an accent; ink is a pale lavender. */
+:root[data-theme="purple"] {
+  --color-accent: #a382e6;
+  --color-accent-strong: #9168e8;
+  --color-accent-ink: #d8c8f8;
+}
+
+/* Olive — a muted, earthy olive-green. Low saturation on purpose; strong
+   lifts slightly for emphasis, ink is a pale khaki that stays readable. */
+:root[data-theme="olive"] {
+  --color-accent: #9ca05b;
+  --color-accent-strong: #adb15e;
+  --color-accent-ink: #dadd9f;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv01", "cv03", "ss01";
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--color-accent) 34%, transparent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--ep-elevation-focus);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border: 3px solid var(--color-canvas);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+  }
+}
+
+@layer utilities {
+  /* Display serif — editorial confidence at large sizes */
+  .display {
+    font-family: var(--font-serif);
+    letter-spacing: -0.012em;
+  }
+
+  /* Newspaper kicker — small serif section header */
+  .kicker {
+    font-family: var(--font-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+
+  /* Intelligence as a hint — glow dialed well back (~9% accent) */
+  .glow-field {
+    background: radial-gradient(
+      54% 40% at 20% -6%,
+      var(--ep-accent-glow) 0%,
+      transparent 60%
+    );
+  }
+
+  /* Tabular numerals — every metric, negative-tracked for density */
+  .tnum {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum";
+    letter-spacing: -0.035em;
+  }
+
+  /* Video scrubber — a hairline track (filled inline with the theme accent)
+     and a small accent thumb. Squared to match the system. */
+  .ep-scrub {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 999px;
+    cursor: pointer;
+    outline: none;
+  }
+  .ep-scrub::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 11px;
+    width: 11px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    border: 2px solid var(--color-canvas);
+    box-shadow: 0 0 0 1px color-mix(in oklch, var(--color-accent) 40%, transparent);
+  }
+  .ep-scrub::-moz-range-thumb {
+    height: 9px;
+    width: 9px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    border: 2px solid var(--color-canvas);
+  }
+  .ep-scrub:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-accent) 55%, transparent);
+  }
+
+  /* Video transport variant — a WHITE (neutral) playhead, not the theme
+     accent, so the control chrome stays clean over arbitrary footage.
+     Scoped to the video player; the audio scrubber keeps its accent. */
+  .ep-scrub-white::-webkit-slider-thumb {
+    background: #ffffff;
+    border-color: rgba(10, 10, 10, 0.55);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+  }
+  .ep-scrub-white::-moz-range-thumb {
+    background: #ffffff;
+    border-color: rgba(10, 10, 10, 0.55);
+  }
+  .ep-scrub-white:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+  }
+
+  /* Keep the fact carousels scrollable without a visible bar */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Very fine grain so the near-black doesn't go flat */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
