@@ -111,6 +111,46 @@ export const THEME_ORDER: ThemeName[] = ["blue", "coral", "purple", "olive"];
 /** The default theme applied when no data-theme attribute is set. */
 export const DEFAULT_THEME: ThemeName = "blue";
 
+/* ==================================================================== *
+   MODE — the second axis. Dark (default) and light. Orthogonal to theme:
+   any mode × theme composes. Light overrides ONLY the base neutral tokens
+   with a warm book-paper palette (never #fff), plus a per-theme accent
+   re-derivation for contrast on paper. Apply with data-mode="light".
+ * ==================================================================== */
+
+export type Mode = "dark" | "light";
+
+/** The default mode when no data-mode attribute is set. */
+export const DEFAULT_MODE: Mode = "dark";
+
+/**
+ * Light-mode base palette — warm book paper. Mirrors the
+ * :root[data-mode="light"] block in src/index.css. Theme-independent.
+ */
+export const lightColor = {
+  canvas: "#f4efe3", // warm book paper — the page (never #fff)
+  surface: "#fbf8f0", // card — a cleaner sheet lifting off the page
+  elevated: "#efeadc", // chip / input / inset — a hair deeper, warm
+  line: "#e4ddcd", // warm hairline, low contrast
+  lineStrong: "#d6cdb8", // emphasized warm hairline
+  ink: "#211e19", // warm near-black
+  ink2: "#5c564b", // warm gray
+  ink3: "#837b6b", // warm light gray — meta
+} as const;
+
+/**
+ * Per-theme accent re-derived for paper. `accentInk` is accent TEXT crisp
+ * on cream; `accentStrong` is an accent FILL that carries cream button text
+ * with contrast. The accent mid-hue (from color / themes) is unchanged —
+ * it's a mid-tone and reads on paper as-is.
+ */
+export const lightAccent: Record<ThemeName, { accentStrong: string; accentInk: string }> = {
+  blue: { accentStrong: "#3b66df", accentInk: "#2f5ccf" },
+  coral: { accentStrong: "#d9542f", accentInk: "#bf4a2c" },
+  purple: { accentStrong: "#7a52d4", accentInk: "#6a45bd" },
+  olive: { accentStrong: "#6f732f", accentInk: "#5f6320" },
+};
+
 /** The three type families and the job each one does. */
 export const font = {
   /** Body & UI. Warm-neutral grotesque; the workhorse. */
@@ -228,6 +268,8 @@ export const tokens = {
   color,
   accentGlow,
   themes,
+  lightColor,
+  lightAccent,
   font,
   fontSize,
   fontWeight,

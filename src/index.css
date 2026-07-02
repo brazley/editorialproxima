@@ -160,6 +160,62 @@
   --color-accent-ink: #dadd9f;
 }
 
+/* ==================================================================== *
+   LIGHT MODE — book paper. An added mode; dark is the default.
+   --------------------------------------------------------------------
+   The second composable axis. `data-mode="light"` on <html> overrides
+   ONLY the base neutral tokens — canvas, surfaces, ink levels, borders —
+   with a warm, ivory book-paper palette (never #fff). The accent HUE
+   stays driven by data-theme and is orthogonal, so every mode × theme
+   combination composes: light+coral, dark+olive, and so on.
+
+   The intelligence whisper holds on paper: the dark-canvas glow becomes a
+   soft accent tint, and accent-ink / accent-strong are re-derived per
+   theme so accent TEXT is crisp on cream and accent FILLS carry cream
+   button text with proper contrast. The accent mid-hue (dots, strokes,
+   pins, sparklines, focus) is a mid-tone and reads on paper unchanged.
+ * ==================================================================== */
+:root[data-mode="light"] {
+  color-scheme: light;
+
+  --color-canvas: #f4efe3;   /* warm book paper — the page. never #fff */
+  --color-surface: #fbf8f0;  /* card — a cleaner sheet lifting off the page */
+  --color-elevated: #efeadc; /* chip / input / inset — a hair deeper, warm */
+  --color-line: #e4ddcd;         /* warm hairline, low contrast */
+  --color-line-strong: #d6cdb8;  /* emphasized warm hairline */
+
+  --color-ink: #211e19;   /* warm near-black */
+  --color-ink-2: #5c564b; /* warm gray */
+  --color-ink-3: #837b6b; /* warm light gray — meta, captions */
+
+  /* the whisper on paper: a soft accent tint, not a dark-canvas glow */
+  --ep-accent-glow: color-mix(in oklch, var(--color-accent) 15%, transparent);
+
+  /* default (blue) accent re-derived for paper; theme combos override below */
+  --color-accent-strong: #3b66df;
+  --color-accent-ink: #2f5ccf;
+}
+
+/* Per-theme accent on paper — combined selectors (higher specificity) win
+   over both the mode block and the dark theme blocks. accent-ink = crisp
+   accent text on cream; accent-strong = accent fill that carries cream text. */
+:root[data-mode="light"][data-theme="blue"] {
+  --color-accent-strong: #3b66df;
+  --color-accent-ink: #2f5ccf;
+}
+:root[data-mode="light"][data-theme="coral"] {
+  --color-accent-strong: #d9542f;
+  --color-accent-ink: #bf4a2c;
+}
+:root[data-mode="light"][data-theme="purple"] {
+  --color-accent-strong: #7a52d4;
+  --color-accent-ink: #6a45bd;
+}
+:root[data-mode="light"][data-theme="olive"] {
+  --color-accent-strong: #6f732f;
+  --color-accent-ink: #5f6320;
+}
+
 @layer base {
   * {
     border-color: var(--color-line);

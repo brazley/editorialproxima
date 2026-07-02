@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { TopBar, NavLink, Badge } from "./lib/ep";
 import { ThemeSwitcher } from "./guide/ThemeSwitcher";
+import { ModeToggle } from "./guide/ModeToggle";
 import { ColorSection } from "./guide/ColorSection";
 import { TypeSection } from "./guide/TypeSection";
 import { ScaleSection } from "./guide/ScaleSection";
@@ -123,6 +124,7 @@ export default function App() {
         }
         actions={
           <>
+            <ModeToggle />
             <ThemeSwitcher />
             <a
               href="#components"

@@ -74,7 +74,7 @@ function ElevationScale() {
     <>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {items.map((e) => (
-          <div key={e.name} className="rounded-card border border-line bg-canvas/40 p-6">
+          <div key={e.name} className="rounded-card border border-line bg-surface p-6">
             <div
               className="grid h-20 place-items-center rounded-card border border-line bg-surface"
               style={{ boxShadow: e.shadow }}
@@ -114,7 +114,7 @@ function MotionScale() {
           stagger <Code>{motionTokens.stagger}s</Code>
         </span>
       </div>
-      <div className="rounded-card border border-line bg-canvas/40 p-6">
+      <div className="rounded-card border border-line bg-surface p-6">
         <div className="flex flex-wrap gap-2.5">
           {[0, 1, 2, 3, 4].map((i) => (
             <motion.div

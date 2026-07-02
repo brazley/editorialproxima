@@ -30,7 +30,7 @@ export function TypeSection() {
       blurb="Three families, three jobs. Source Serif 4 is the editorial voice; Geist carries body and UI; Geist Mono holds every number in tabular alignment. The serif does the emotional work, the sans does the labor, the mono keeps the figures honest."
     >
       <Group title="Source Serif 4" note="display · headlines · editorial body — the .display utility">
-        <div className="rounded-card border border-line bg-canvas/40 px-6 py-2">
+        <div className="rounded-card border border-line bg-surface px-6 py-2">
           <Specimen
             sample="Here's what moved."
             meta="display · 32px / 600 · page header (h1)"
@@ -53,7 +53,7 @@ export function TypeSection() {
       </Group>
 
       <Group title="Geist" note="body & UI — the default family">
-        <div className="rounded-card border border-line bg-canvas/40 px-6 py-2">
+        <div className="rounded-card border border-line bg-surface px-6 py-2">
           <Specimen
             sample="Ranked matches, explained — pushed to both sides of the network."
             meta="sans · 15px / 500 · lead / card title"
@@ -76,7 +76,7 @@ export function TypeSection() {
       </Group>
 
       <Group title="Geist Mono" note="tabular numerals — the .tnum utility · every metric">
-        <div className="rounded-card border border-line bg-canvas/40 px-6 py-2">
+        <div className="rounded-card border border-line bg-surface px-6 py-2">
           <Specimen
             sample="$4.82M   +12.4%   18,400   9 days"
             meta="tnum · 22px / 500 · headline metrics"
@@ -93,7 +93,7 @@ export function TypeSection() {
       </Group>
 
       <Group title="Kicker" note="the newspaper eyebrow — small serif, uppercase, tracked">
-        <div className="rounded-card border border-line bg-canvas/40 px-6 py-6">
+        <div className="rounded-card border border-line bg-surface px-6 py-6">
           <span className="kicker">The Exchange</span>
           <p className="mt-3 text-[12px] text-ink-3">
             The <Code>.kicker</Code> utility: Source Serif 4, 12px, 600, uppercase, <Code>0.06em</Code>{" "}

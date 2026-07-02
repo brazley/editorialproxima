@@ -69,7 +69,7 @@ export function Stage({
   return (
     <div
       className={cx(
-        "rounded-card border border-line bg-canvas/40 p-6",
+        "rounded-card border border-line bg-surface p-6",
         center && "flex flex-wrap items-center gap-4",
         className,
       )}
