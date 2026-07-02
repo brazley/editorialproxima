@@ -42,7 +42,7 @@ export function Avatar({
     tint === "accent"
       ? "var(--color-accent-ink)"
       : tint === "sand"
-        ? "var(--color-sand)"
+        ? "var(--color-sand-ink)"
         : "var(--color-ink-2)";
 
   return (

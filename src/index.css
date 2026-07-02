@@ -36,6 +36,7 @@
 
   /* ---- Color · warm neutral + market signal ------------------------- */
   --color-sand: #dad8cf; /* warm off-white — awards, wordmark warmth */
+  --color-sand-ink: #dad8cf; /* readable sand text on the sand-tinted fill (dark: light-warm) */
   --color-gain: #56b981; /* positive delta (green) */
   --color-loss: #e5715b; /* negative delta (warm red) */
 
@@ -187,6 +188,7 @@
   --color-ink: #211e19;   /* warm near-black */
   --color-ink-2: #5c564b; /* warm gray */
   --color-ink-3: #837b6b; /* warm light gray — meta, captions */
+  --color-sand-ink: #6e6242; /* dark warm khaki — sand text stays readable on the light sand fill */
 
   /* the whisper on paper: a soft accent tint, not a dark-canvas glow */
   --ep-accent-glow: color-mix(in oklch, var(--color-accent) 15%, transparent);
