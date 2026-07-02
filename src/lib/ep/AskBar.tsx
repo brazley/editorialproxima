@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
 import { cx } from "./util";
 
 export interface AskBarProps {
@@ -47,17 +46,8 @@ export function AskBar({
           onSubmit?.(val);
         }}
         className="relative flex items-center gap-2.5 rounded-field border bg-surface px-3.5 py-2 transition-colors"
-        style={{
-          borderColor: focused
-            ? "color-mix(in oklch, var(--color-accent) 45%, transparent)"
-            : "var(--color-line)",
-        }}
+        style={{ borderColor: focused ? "var(--color-line-strong)" : "var(--color-line)" }}
       >
-        <Sparkles
-          size={14}
-          className="shrink-0"
-          style={{ color: focused ? "var(--color-accent)" : "var(--color-ink-3)" }}
-        />
         <input
           value={val}
           onChange={(e) => {
@@ -68,7 +58,8 @@ export function AskBar({
           onBlur={() => setFocused(false)}
           placeholder={placeholder}
           aria-label={label}
-          className="w-full bg-transparent text-[13px] text-ink placeholder:text-ink-3 focus:outline-none"
+          className="w-full bg-transparent text-[13px] text-ink placeholder:text-ink-3"
+          style={{ outline: "none", boxShadow: "none" }}
         />
         {kbd && (
           <kbd className="tnum hidden shrink-0 rounded-chip border border-line bg-elevated px-1.5 py-0.5 text-[10px] text-ink-3 sm:inline-block">
